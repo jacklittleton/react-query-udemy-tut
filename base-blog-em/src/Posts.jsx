@@ -14,6 +14,7 @@ export function Posts() {
   const { data, isError, error, isLoading, errorUpdateCount } = useQuery({
     queryKey: ["posts"],
     queryFn: fetchPosts,
+    staleTime: 5000,
   });
 
   if (isLoading) {
@@ -25,7 +26,7 @@ export function Posts() {
       <>
         <h3>Something went wrong. error count: {errorUpdateCount}</h3>
         <h4>{error.toString()}</h4>
-        
+
       </>
     );
   }
