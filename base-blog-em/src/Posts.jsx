@@ -14,8 +14,11 @@ export function Posts() {
 
   const deleteMutation = useMutation({
     mutationFn: (postId) => deletePost(postId),
+  });
 
-  })
+  const updateMutation = useMutation({
+    mutationFn: (postId) => updatePost(postId),
+  });
 
   useEffect(() => {
     if (currentPage < maxPostPage) {
@@ -58,6 +61,7 @@ export function Posts() {
             className="post-title"
             onClick={() => {
               deleteMutation.reset();
+              updateMutation.reset();
               setSelectedPost(post);
             }}
           >
@@ -79,7 +83,8 @@ export function Posts() {
         </button>
       </div>
       <hr/>
-      {selectedPost && <PostDetail post={selectedPost} deleteMutation={deleteMutation}/>}
+      {selectedPost &&
+        <PostDetail post={selectedPost} deleteMutation={deleteMutation} updateMutation={updateMutation}/>}
     </>
   );
 }
